@@ -1,0 +1,56 @@
+html, body{
+  height:100%;
+}
+button{
+	cursor: pointer;
+}
+.selectable
+{
+	cursor: pointer;
+}
+.cola-title {
+	width: 270px;
+}
+.cola {
+    width: 270px;
+    min-height: 100%;
+	height: 600px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+	position: relative; 
+	float:left;
+}
+.nota {
+	padding: 5px;
+    width: 250px;
+	height: 145px;
+	margin-bottom:5px;
+    border: 1px solid #aaaaaa;
+	background-color:white;
+	overflow-y: scroll;
+	cursor: move;
+}
+.fila {
+	height: 100%;
+}
+
+#top {
+    max-width: 1440px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.title {
+	margin-bottom: 0px;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+h3 {
+	margin-top: 0px;
+}
