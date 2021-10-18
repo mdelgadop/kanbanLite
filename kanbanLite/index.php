@@ -67,12 +67,12 @@
 					</div>
 					<div v-bind:id="status.publicid" class="cola" v-on:drop="mydrop" v-on:dragover="myallowDrop">
 
-						<div v-on:click="GetTaskInfo(task.publicid)"  for="modal-info-task" v-for="task in tasksListJSON" v-bind:id="task.publicid" class="nota" draggable="true" v-on:dragstart="mydrag" v-if="task.status === status.id">
-						  <div class="card-body">
+						<div v-on:click="GetTaskInfo(task.publicid)"  for="modal-info-task" v-for="task in tasksListJSON" v-bind:id="task.publicid" class="nota border border-primary" draggable="true" v-on:dragstart="mydrag" v-if="task.status === status.id">
+
 							<button class="btn-small btn-danger-outline" v-on:click="DeleteTask(task.publicid)">x</button>
 							<label class="inline btn-block selectable" for="modal-info-task">{{ task.title }}</label>
-							<p>{{ task.request }}</p>							
-						  </div>
+							<p>{{ task.request }}</p>
+
 						</div>
 
 					</div>

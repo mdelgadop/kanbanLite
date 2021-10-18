@@ -7,5 +7,6 @@
 	  public $request;
 	  public $purpose;
 	  public $status;
+	  public $notes;
 	 }
 ?>

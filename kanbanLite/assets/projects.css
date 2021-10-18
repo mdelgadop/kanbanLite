@@ -7,6 +7,7 @@ button{
 .selectable
 {
 	cursor: pointer;
+	text-decoration: underline;
 }
 .cola-title {
 	width: 270px;
@@ -22,7 +23,7 @@ button{
 }
 .nota {
 	padding: 5px;
-    width: 250px;
+    width: 255px;
 	height: 145px;
 	margin-bottom:5px;
     border: 1px solid #aaaaaa;
@@ -32,6 +33,10 @@ button{
 }
 .fila {
 	height: 100%;
+}
+.modal-long {
+	max-height: 450px;
+    overflow-y: scroll;
 }
 
 #top {

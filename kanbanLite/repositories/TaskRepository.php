@@ -59,6 +59,9 @@ class TaskRepository extends GenericRepository {
 			$current_task->role = $this->decode("{$row['role']}");
 			$current_task->purpose = $this->decode("{$row['purpose']}");
 			$current_task->status = "{$row['status_id']}";
+			
+			$current_task->notes = array();
+			
 			$tasksGotten[$numtasks] = $current_task;
 			$numtasks++;
 		}

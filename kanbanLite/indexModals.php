@@ -54,11 +54,11 @@
 		</div>
 		<div class="form-group">
 		  <label for="create-task-request"></label>
-		  <input type="text" placeholder="Quiero (petición)" v-model.text="createTaskRequest" style="min-width:340px">
+		  <textarea id="large-input" placeholder="Quiero (petición)" v-model.text="createTaskRequest" style="min-width:340px"></textarea>
 		</div>
 		<div class="form-group">
-		  <label for="create-task-purpose"></label>
-		  <input type="text" placeholder="Para (justificación)" v-model.text="createTaskPurpose" style="min-width:340px">
+		  <label for="create-task-purpose">Large Input</label>
+		  <textarea id="large-input" placeholder="Para (justificación)" v-model.text="createTaskPurpose" style="min-width:340px"></textarea>
 		</div>
 		
 		<div class="row flex-center">
@@ -71,20 +71,54 @@
 	<input class="modal-state" id="modal-info-task" type="checkbox" ref="modalInfoTask">
 	<div class="modal">
 	  <label class="modal-bg" for="modal-info-task"></label>
-	  <div class="modal-body" style="max-width:700px;">
+	  <div class="modal-body" style="max-width:700px;min-width:430px;">
 		<div v-if="taskToShow == null">
 			<h4>Loading...</h4>
 		</div>
 		<div v-if="taskToShow !== null">
 			<label class="btn-close" for="modal-info-task">X</label>
-			<br/>
-			<h4 class="card-title">{{ taskToShow == null ? '' : taskToShow.title }}</h4>
-			<hr/>
-			<h4>Como: {{ taskToShow == null ? '' : taskToShow.role }}</h4>
-			<h4>Quiero: {{ taskToShow == null ? '' : taskToShow.request }}</h4>
-			<h4>Para: {{ taskToShow == null ? '' : taskToShow.purpose }}</h4>
+				<article class="article" style="margin-top: 30px;">
+				  <div class="alert alert-primary" style="margin-top: 30px;">{{ taskToShow == null ? '' : taskToShow.title }}</div>
+				  <div class="modal-long">
+					  <h4>Como: {{ taskToShow == null ? '' : taskToShow.role }}</h4>
+					  <br/>
+					  <div class="collapsible">
+						<input id="collapsible1" type="checkbox" name="collapsible" checked="true">
+						<label for="collapsible1">Quiero</label>
+						<div class="collapsible-body">
+						  <span>{{ taskToShow == null ? '' : taskToShow.request }}</span>
+						</div>
+					  </div>
+					  <div class="collapsible">
+						<input id="collapsible2" type="checkbox" name="collapsible" checked="true">
+						<label for="collapsible2">Para</label>
+						<div class="collapsible-body">
+						  <span>{{ taskToShow == null ? '' : taskToShow.purpose }}</span>
+						</div>
+					  </div>
+					  <div class="collapsible" style="padding:5px">
+						<input id="collapsible3" type="checkbox" name="collapsible">
+						<label for="collapsible3">Notas</label>
+						<div class="collapsible-body">
+							<div class="row">
+							  <div class="col-9 col" style="padding:5px">
+								<textarea class="inline" id="txtnewNoteForTask" placeholder="New note" v-model.text="newNoteForTask" style="min-width:100%;"></textarea>
+							  </div>
+							  <div class="col-3 col" style="padding:5px">
+								<button class="inline paper-btn margin btn-success btn-small inline" v-on:click="CreateNote()">+</button>
+							  </div>
+							</div>
+
+							<ul v-if="taskToShow.notes !== null">
+							  <li v-for="note in taskToShow.notes"><span>{{ note == null ? '' : note.note }}</span></li>
+							</ul>
+						</div>
+					  </div>
+					  
+				  </div>
+				</article>
+			
 		</div>
 	  </div>
 	</div>
-	
 	

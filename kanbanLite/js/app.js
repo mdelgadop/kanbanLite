@@ -7,6 +7,7 @@
 			createSprintName : '',
 			currentSprintId : null,
 			sprintsListJSON : [],
+			currentTaskId : null,
 			
 			statusesListJSON : [],
 			
@@ -15,6 +16,8 @@
 			createTaskRequest : '',
 			createTaskPurpose : '',
 			tasksListJSON : [],
+			
+			newNoteForTask : '',
 			
 			taskToShow : null
 		},
@@ -57,6 +60,7 @@
 				this.createTaskPurpose = '';
 				this.createProjectName = '';
 				this.createSprintName = '';
+				this.newNoteForTask = '';
 			},
 			CreteProject: function()
 			{
@@ -192,6 +196,7 @@
 			},
 			GetTaskInfo: function(task_to_get)
 			{
+				this.currentTaskId = task_to_get;
 				var data = new FormData();
 				data.append('ip', this.currentProjectId);
 				data.append('is', this.currentSprintId);
@@ -210,6 +215,36 @@
 					else if(response.code==='200')
 					{
 						this.taskToShow = response.task;
+						this.LoadNotes();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { alert(error); } );
+			},
+			LoadNotes: function()
+			{
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('is', this.currentSprintId);
+				data.append('it', this.currentTaskId);
+				
+				fetch('./controllers/getNotesOfTaskController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{
+					JSON.stringify(response);
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
+						this.taskToShow.notes = response.notes;
 					}
 					else
 					{
@@ -269,6 +304,36 @@
 						this.CleanModals();
 						this.LoadTasks();
 						this.$refs.modalCreateTask.click();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { alert(error); } );
+			},
+			CreateNote: function()
+			{
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('is', this.currentSprintId);
+				data.append('it', this.currentTaskId);
+				data.append('n', this.newNoteForTask);
+				
+				fetch('./controllers/createNoteForTaskController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{ 
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
+						this.newNoteForTask = '';
+						this.LoadNotes();
 					}
 					else
 					{
