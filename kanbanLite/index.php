@@ -27,32 +27,37 @@
   <div id='top' class='site container'>
 	<div class='paper' id="app">
 	
-		<h2>@mdelgadop Projects</h2>
-	  
-		<div class="form-group inline" style="margin-right: 50px;">
-			<label for="slProject">Project</label>
-			<div>
-			<select class="inline" id="slProject" v-model="currentProjectId" v-on:change="LoadSprints()">
-			  <option v-for="project in projectsListJSON" v-bind:value="project.id">
-				{{ project.name }}
-			  </option>
-			</select>
-			<label class="inline paper-btn margin btn-success btn-small" for="modal-create-project">+</label>
-			<button class="btn-small btn-danger-outline" v-on:click="DeleteProject()">x</button>
+	
+
+		<div class="row flex-edges" style="margin:0px">
+		  <div class="sm-6 col" style="padding:0px"><h2>@mdelgadop Projects</h2></div>
+		  <div class="sm-6 col" style="padding:0px">
+			<div class="form-group inline" style="margin-right: 50px;">
+				<label for="slProject">Project</label>
+				<div>
+				<select class="inline" id="slProject" v-model="currentProjectId" v-on:change="LoadSprints()">
+				  <option v-for="project in projectsListJSON" v-bind:value="project.id">
+					{{ project.name }}
+				  </option>
+				</select>
+				<label class="inline paper-btn margin btn-success btn-small" for="modal-create-project">+</label>
+				<button class="btn-small btn-danger-outline" v-on:click="DeleteProject()">x</button>
+				<label class="inline" for="modal-conf-project"><img src="./icons/conf_48.png" class="no-responsive no-border selectable" style="width:30px" /></label>
+				</div>
 			</div>
-		</div>
-		
-		<div class="form-group inline" v-if="currentProjectId !== null">
-			<label for="slSprint">Sprints</label>
-			<div>
-			<select class="inline" id="slSprint" v-model="currentSprintId" v-on:change="LoadTasks()">
-			  <option v-for="sprint in sprintsListJSON" v-bind:value="sprint.id">
-				{{ sprint.name }}
-			  </option>
-			</select>
-			<label class="inline paper-btn margin btn-success btn-small" for="modal-create-sprint">+</label>
-			<button class="btn-small btn-danger-outline" v-on:click="DeleteSprint()">x</button>
+			<div class="form-group inline" v-if="currentProjectId !== null">
+				<label for="slSprint">Sprints</label>
+				<div>
+				<select class="inline" id="slSprint" v-model="currentSprintId" v-on:change="LoadTasks()">
+				  <option v-for="sprint in sprintsListJSON" v-bind:value="sprint.id">
+					{{ sprint.name }}
+				  </option>
+				</select>
+				<label class="inline paper-btn margin btn-success btn-small" for="modal-create-sprint">+</label>
+				<button class="btn-small btn-danger-outline" v-on:click="DeleteSprint()">x</button>
+				</div>
 			</div>
+		  </div>
 		</div>
 
 		<div v-if="currentSprintId !== null">

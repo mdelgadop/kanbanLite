@@ -122,3 +122,18 @@
 	  </div>
 	</div>
 	
+	<input class="modal-state" id="modal-conf-project" type="checkbox">
+	<div class="modal">
+	  <label class="modal-bg" for="modal-conf-project"></label>
+	  <div class="modal-body">
+		<label class="btn-close" for="modal-conf-project">X</label>
+		<h4 class="modal-title">Configuration</h4>
+		<br/>
+		
+		<div class="row flex-center">
+			<button class="btn-success-outline" onclick="javascript:alert('TODO');">Save</button>
+		</div>
+
+	  </div>
+	</div>
+	
