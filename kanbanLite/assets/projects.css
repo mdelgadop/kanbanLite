@@ -16,18 +16,21 @@ button{
     width: 270px;
     min-height: 100%;
 	height: 600px;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #aaaaaa;
 	position: relative; 
 	float:left;
 }
 .nota {
-	padding: 5px;
-    width: 255px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+    width: 260px;
 	height: 145px;
 	margin-bottom:5px;
-    border: 1px solid #aaaaaa;
-	background-color:white;
+    border: 1px solid #f5d400;
+	background-color:#ffffa5;
 	overflow-y: scroll;
 	cursor: move;
 }

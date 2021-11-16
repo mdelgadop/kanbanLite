@@ -78,28 +78,27 @@
 		<div v-if="taskToShow !== null">
 			<label class="btn-close" for="modal-info-task">X</label>
 				<article class="article" style="margin-top: 30px;">
-				  <div class="alert alert-primary" style="margin-top: 30px;">{{ taskToShow == null ? '' : taskToShow.title }}</div>
+				  <div class="alert alert-primary" style="margin-bottom: 10px;">{{ taskToShow == null ? '' : taskToShow.title }}</div>
 				  <div class="modal-long">
-					  <h4>Como: {{ taskToShow == null ? '' : taskToShow.role }}</h4>
-					  <br/>
+					  <h4 style="margin-bottom: 0px;">Como: {{ taskToShow == null ? '' : taskToShow.role }}</h4>
 					  <div class="collapsible">
 						<input id="collapsible1" type="checkbox" name="collapsible" checked="true">
-						<label for="collapsible1">Quiero</label>
-						<div class="collapsible-body">
+						<label for="collapsible1" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Quiero</label>
+						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 						  <span>{{ taskToShow == null ? '' : taskToShow.request }}</span>
 						</div>
 					  </div>
 					  <div class="collapsible">
 						<input id="collapsible2" type="checkbox" name="collapsible" checked="true">
-						<label for="collapsible2">Para</label>
-						<div class="collapsible-body">
+						<label for="collapsible2" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Para</label>
+						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 						  <span>{{ taskToShow == null ? '' : taskToShow.purpose }}</span>
 						</div>
 					  </div>
 					  <div class="collapsible" style="padding:5px">
-						<input id="collapsible3" type="checkbox" name="collapsible">
-						<label for="collapsible3">Notas</label>
-						<div class="collapsible-body">
+						<input id="collapsible3" type="checkbox" name="collapsible" checked="true">
+						<label for="collapsible3" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Notas</label>
+						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 							<div class="row">
 							  <div class="col-9 col" style="padding:5px">
 								<textarea class="inline" id="txtnewNoteForTask" placeholder="New note" v-model.text="newNoteForTask" style="min-width:100%;"></textarea>
@@ -125,14 +124,39 @@
 	<input class="modal-state" id="modal-conf-project" type="checkbox">
 	<div class="modal">
 	  <label class="modal-bg" for="modal-conf-project"></label>
-	  <div class="modal-body">
+	  <div class="modal-body" style="max-width:700px;min-width:430px;">
 		<label class="btn-close" for="modal-conf-project">X</label>
-		<h4 class="modal-title">Configuration</h4>
+		<h4 class="modal-title">Project's Configuration</h4>
 		<br/>
 		
-		<div class="row flex-center">
-			<button class="btn-success-outline" onclick="javascript:alert('TODO');">Save</button>
-		</div>
+		<table class="container">
+			<tr class="fila" id="editStatuses" v-for="status in statusesListJSON">
+				<td>
+					{{ status.name }}
+				</td>
+				<td>
+					<select v-model="status.type" v-on:change="OnStatusTypeChange($event, status.publicid)">
+					  <option value="alert-primary">Initial</option>
+					  <option value="alert-secondary">Intermediate</option>
+					  <option value="alert-success">Final</option>
+					</select>
+					
+				</td>
+				<td>
+					<button class="btn-small btn-danger-outline" v-on:click="DeleteStatus(status.publicid)">x</button>
+				</td>
+			</tr>
+
+			<tr class="fila">
+				<td colspan="2">
+					<input type="text" class="inline" id="txtnewStatusForProject" placeholder="New status" v-model.text="newStatusForProject" style="min-width:100%;" />
+				</td>
+				<td>
+					<button class="inline paper-btn margin btn-success btn-small inline" v-on:click="CreateStatus()">+</button>
+				</td>
+			</tr>
+
+		</table>
 
 	  </div>
 	</div>

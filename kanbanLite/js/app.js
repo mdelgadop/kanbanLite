@@ -19,6 +19,8 @@
 			
 			newNoteForTask : '',
 			
+			newStatusForProject : '',
+			
 			taskToShow : null
 		},
 		created() {
@@ -41,7 +43,19 @@
 						this.projectsListJSON = response.projects;
 						if(response.numprojects > 0)
 						{
-							this.currentProjectId = response.projects[0].id;
+							if(this.currentProjectId == null)
+							{
+								this.currentProjectId = response.projects[0].id;
+							}
+							else
+							{
+								var i = 0;
+								while(i < response.projects.length && response.projects[i].id != this.currentProjectId) {i++;}
+								if(i >= response.projects.length)
+								{
+									this.currentProjectId = response.projects[0].id;
+								}
+							}
 							this.LoadSprints();
 						}
 					}
@@ -61,6 +75,7 @@
 				this.createProjectName = '';
 				this.createSprintName = '';
 				this.newNoteForTask = '';
+				this.newStatusForProject = '';
 			},
 			CreteProject: function()
 			{
@@ -393,6 +408,9 @@
 			},
 			DeleteTask: function(taskid)
 			{
+				if(!confirm("¿Estás seguro de borrar la historia de usuario? Se perderá toda la información."))
+					return;
+				
 				var data = new FormData();
 				data.append('ip', this.currentProjectId);
 				data.append('is', this.currentSprintId);
@@ -421,6 +439,9 @@
 			},
 			DeleteSprint: function()
 			{
+				if(!confirm("¿Estás seguro de borrar sprint? Se perderán todas las historias de usuario."))
+					return;				
+
 				var data = new FormData();
 				data.append('ip', this.currentProjectId);
 				data.append('is', this.currentSprintId);
@@ -449,6 +470,9 @@
 			},
 			DeleteProject: function(taskid)
 			{
+				if(!confirm("¿Estás seguro de borrar proyecto? Se perderán todos los sprints y todas las historias de usuario."))
+					return;
+
 				var data = new FormData();
 				data.append('ip', this.currentProjectId);
 				
@@ -466,6 +490,91 @@
 					{
 						this.currentProjectId = null;
 						this.currentSprintId = null;
+						this.LoadProjects();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { alert(error); } );
+			},
+			CreateStatus: function()
+			{
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('st', this.newStatusForProject);
+				
+				fetch('./controllers/createStatusController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
+						this.LoadProjects();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { alert(error); } );
+			},
+			DeleteStatus: function(statuspublicid)
+			{
+				if(!confirm("¿Estás seguro de borrar este estado? Se perderán todas las historias de usuario."))
+					return;
+
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('st', statuspublicid);
+				
+				fetch('./controllers/deleteStatusController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
+						this.LoadProjects();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { alert(error); } );
+			},
+			OnStatusTypeChange: function(event, statuspublicid)
+			{
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('st', statuspublicid);
+				data.append('ty', event.target.value);
+				
+				fetch('./controllers/changeStatusTypeController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
 						this.LoadProjects();
 					}
 					else

@@ -85,6 +85,52 @@ class ProjectRepository extends GenericRepository {
 		return $result;
    }
 
+   function changeTypeOfStatus($projectId, $statusId, $typeId)
+   {
+		$db = new SQLite3('../db/projects.db');
+		include("../db/init.php");
+
+		$myQuery = "update statuses ";
+		$myQuery .= " set type='".$typeId."' ";
+		$myQuery .= " where id=".$statusId." ";
+		$myQuery .= " and project_id=".$projectId." ";
+
+		$result = $db->exec($myQuery);
+		
+		return $result;
+   }
+   
+   function deleteStatus($projectId, $statusId)
+   {
+		$db = new SQLite3('../db/projects.db');
+		include("../db/init.php");
+
+		$myQuery = "delete from statuses ";
+		$myQuery .= " where id=".$statusId." ";
+		$myQuery .= " and project_id=".$projectId." ";
+
+		$result = $db->exec($myQuery);
+		
+		$myQuery = "delete from tasks ";
+		$myQuery .= " where status_id not in (select id from statuses) ";
+
+		$result = $db->exec($myQuery);
+		
+		return $result;
+   }
+   
+   function createStatus($projectId, $statusName)
+   {
+		$db = new SQLite3('../db/projects.db');
+		include("../db/init.php");
+
+		$myQuery = "INSERT INTO statuses(name, type, project_id) values ('".$statusName."', 'alert-secondary', ".$projectId.")";
+
+		$result = $db->exec($myQuery);
+		
+		return $result;
+   }
+
 }
 
 ?>
