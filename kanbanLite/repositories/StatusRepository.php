@@ -13,6 +13,8 @@ class StatusRepository extends GenericRepository {
 	   $this->$_typesOfStatuses[0] = "alert-primary";
 	   $this->$_typesOfStatuses[1] = "alert-secondary";
 	   $this->$_typesOfStatuses[2] = "alert-success";
+	   $this->$_typesOfStatuses[3] = "alert-warning";
+	   $this->$_typesOfStatuses[4] = "alert-danger";
    }
    
    function getByProject($projectId)

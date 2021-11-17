@@ -4,6 +4,11 @@ html, body{
 button{
 	cursor: pointer;
 }
+.generalscreen
+{
+	margin-top: 10px;
+	margin-left: 10px;
+}}
 .selectable
 {
 	cursor: pointer;
@@ -27,11 +32,13 @@ button{
 	padding-left: 5px;
 	padding-right: 5px;
     width: 260px;
-	height: 145px;
+	/*height: 145px;*/
+	height: 160px;
 	margin-bottom:5px;
     border: 1px solid #f5d400;
 	background-color:#ffffa5;
-	overflow-y: scroll;
+	/*overflow-y: scroll;*/
+	overflow-y: auto;
 	cursor: move;
 }
 .fila {

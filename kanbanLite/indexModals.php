@@ -8,7 +8,7 @@
 		<br/>
 		<div class="form-group">
 		  <label for="create-project-name"></label>
-		  <input type="text" placeholder="Name" v-model.text="createProjectName" style="min-width:340px">
+		  <input type="text" placeholder="Name" v-model.text="createProjectName" style="min-width:340px" />
 		</div>
 		
 		<div class="row flex-center">
@@ -27,7 +27,7 @@
 		<br/>
 		<div class="form-group">
 		  <label for="create-sprint-name"></label>
-		  <input type="text" placeholder="Name" v-model.text="createSprintName" style="min-width:340px">
+		  <input type="text" placeholder="Name" v-model.text="createSprintName" style="min-width:340px" />
 		</div>
 		
 		<div class="row flex-center">
@@ -46,11 +46,11 @@
 		<br/>
 		<div class="form-group">
 		  <label for="create-task-Title"></label>
-		  <input type="text" placeholder="Título (código)" v-model.text="createTaskTitle" style="min-width:340px">
+		  <input type="text" placeholder="Título (código)" v-model.text="createTaskTitle" style="min-width:340px" />
 		</div>
 		<div class="form-group">
 		  <label for="create-task-role"></label>
-		  <input type="text" placeholder="Como (role)" v-model.text="createTaskRole" style="min-width:340px">
+		  <input type="text" placeholder="Como (role)" v-model.text="createTaskRole" style="min-width:340px" />
 		</div>
 		<div class="form-group">
 		  <label for="create-task-request"></label>
@@ -82,21 +82,21 @@
 				  <div class="modal-long">
 					  <h4 style="margin-bottom: 0px;">Como: {{ taskToShow == null ? '' : taskToShow.role }}</h4>
 					  <div class="collapsible">
-						<input id="collapsible1" type="checkbox" name="collapsible" checked="true">
+						<input id="collapsible1" type="checkbox" name="collapsible" checked="true" />
 						<label for="collapsible1" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Quiero</label>
 						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 						  <span>{{ taskToShow == null ? '' : taskToShow.request }}</span>
 						</div>
 					  </div>
 					  <div class="collapsible">
-						<input id="collapsible2" type="checkbox" name="collapsible" checked="true">
+						<input id="collapsible2" type="checkbox" name="collapsible" checked="true" />
 						<label for="collapsible2" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Para</label>
 						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 						  <span>{{ taskToShow == null ? '' : taskToShow.purpose }}</span>
 						</div>
 					  </div>
 					  <div class="collapsible" style="padding:5px">
-						<input id="collapsible3" type="checkbox" name="collapsible" checked="true">
+						<input id="collapsible3" type="checkbox" name="collapsible" checked="true" />
 						<label for="collapsible3" style="padding-left: 0px;padding-top: 10px;padding-bottom: 5px;">Notas</label>
 						<div class="collapsible-body" style="padding-top: 5px;padding-bottom: 5px;">
 							<div class="row">
@@ -139,6 +139,8 @@
 					  <option value="alert-primary">Initial</option>
 					  <option value="alert-secondary">Intermediate</option>
 					  <option value="alert-success">Final</option>
+					  <option value="alert-warning">Postponed</option>
+					  <option value="alert-danger">Cancelled</option>
 					</select>
 					
 				</td>

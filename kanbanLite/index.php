@@ -24,11 +24,10 @@
 </head>
 
 <body>
-  <div id='top' class='site container'>
-	<div class='paper' id="app">
+<br/>
+  <div id='top' class='site generalscreen'>
+	<div id="app">
 	
-	
-
 		<div class="row flex-edges" style="margin:0px">
 		  <div class="sm-6 col" style="padding:0px"><h2>@mdelgadop Projects</h2></div>
 		  <div class="sm-6 col" style="padding:0px">

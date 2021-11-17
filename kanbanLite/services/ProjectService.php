@@ -102,7 +102,7 @@ class ProjectService {
 			$myresponse->code = '502';
 			$myresponse->message = "El estado no puede estar vacío";
 		}
-		else if(!($typeId=="alert-primary" or $typeId=="alert-secondary" or $typeId=="alert-success"))
+		else if(!($typeId=="alert-primary" or $typeId=="alert-secondary" or $typeId=="alert-success" or $typeId=="alert-warning" or $typeId=="alert-danger"))
 		{
 			$myresponse->code = '503';
 			$myresponse->message = "El nuevo tipo no está permitido";
