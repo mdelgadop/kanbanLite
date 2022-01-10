@@ -123,6 +123,22 @@ class TaskRepository extends GenericRepository {
 		return $result;
 	}
 	
+	function sentToSprint($projectId, $sprintId, $taskId)
+	{
+		$db = new SQLite3('../db/projects.db');
+		include("../db/init.php");
+
+		//SELECT PROJECTS
+		$myQuery = "update tasks set sprint_id=".$sprintId." ";
+		$myQuery .= "where tasks.id=".$taskId." ";
+		$myQuery .= " and tasks.sprint_id in (select id from sprints where project_id=".$projectId.")";
+		$myQuery .= " and ".$sprintId." in (select id from sprints where project_id=".$projectId.")";
+		
+		$result = $db->exec($myQuery);
+		
+		return $result;
+	}
+	
 }
 
 ?>

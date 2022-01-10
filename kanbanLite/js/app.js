@@ -21,7 +21,9 @@
 			
 			newStatusForProject : '',
 			
-			taskToShow : null
+			taskToShow : null,
+			
+			sendToSprintId: null
 		},
 		created() {
 			this.LoadProjects();
@@ -583,6 +585,34 @@
 					}
 				} )
 				.catch(error => { alert(error); } );
+			},
+			SendToSprint: function()
+			{
+				var data = new FormData();
+				data.append('ip', this.currentProjectId);
+				data.append('is', this.sendToSprintId);
+				data.append('it', this.taskToShow.id);
+				
+				fetch('./controllers/sendToSprintController.php', {
+				  method: 'POST', // or 'PUT'
+				  body: data
+				}).then(res => res.json())
+				.then(response => 
+				{ 
+					if(response===null)
+					{
+						alert('Error de conexión');
+					}
+					else if(response.code==='200')
+					{
+						location.reload();
+					}
+					else
+					{
+						alert(response.message);
+					}
+				} )
+				.catch(error => { } );
 			}
 		}
 	});

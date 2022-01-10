@@ -41,7 +41,7 @@
 				</select>
 				<label class="inline paper-btn margin btn-success btn-small" for="modal-create-project">+</label>
 				<button class="btn-small btn-danger-outline" v-on:click="DeleteProject()">x</button>
-				<label class="inline" for="modal-conf-project"><img src="./icons/conf_48.png" class="no-responsive no-border selectable" style="width:30px" /></label>
+				<label class="inline selectable" for="modal-conf-project"><img src="./icons/conf_48.png" class="no-responsive no-border " style="width:30px" /></label>
 				</div>
 			</div>
 			<div class="form-group inline" v-if="currentProjectId !== null">
@@ -72,9 +72,10 @@
 					<div v-bind:id="status.publicid" class="cola" v-on:drop="mydrop" v-on:dragover="myallowDrop">
 
 						<div v-on:click="GetTaskInfo(task.publicid)"  for="modal-info-task" v-for="task in tasksListJSON" v-bind:id="task.publicid" class="nota border border-primary" draggable="true" v-on:dragstart="mydrag" v-if="task.status === status.id">
-
-							
-							<label class="inline btn-block selectable" for="modal-info-task"><button class="btn-small btn-danger-outline" v-on:click="DeleteTask(task.publicid)" style="margin-right:10px">x</button>{{ task.title }}</label>
+							<label class="inline btn-block selectable" for="modal-info-task">
+							<button class="btn-small btn-danger-outline" v-on:click="DeleteTask(task.publicid)">x</button>
+							<label class="paper-btn margin btn-success-outline btn-small" for="modal-send-to-sprint" style="padding-top: 7px;padding-bottom: 8px;padding-left: 5px;padding-right: 5px;">&rarr;</label>
+							{{ task.title }}</label>
 							<p>{{ task.request }}</p>
 
 						</div>

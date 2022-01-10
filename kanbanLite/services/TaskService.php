@@ -246,6 +246,46 @@ class TaskService {
 		return $myresponse;
 	}
 	
+	function sentToSprint($projectId, $sprintId, $taskId)
+	{
+		$myresponse = new response;
+		$myresponse->code = '500';
+		$myresponse->message = "Server Error";
+		
+		if($projectId=="")
+		{
+			$myresponse->code = '501';
+			$myresponse->message = "El proyecto no puede estar vacío";
+		}
+		else if($sprintId=="")
+		{
+			$myresponse->code = '502';
+			$myresponse->message = "El sprint no puede estar vacío";
+		}
+		else if($taskId=="")
+		{
+			$myresponse->code = '503';
+			$myresponse->message = "La tarea no puede estar vacía";
+		}
+		else
+		{
+			try {
+				$repository = new TaskRepository();
+				$result = $repository->sentToSprint($projectId, $sprintId, $taskId);
+				
+				if($result)
+				{
+					$myresponse->code = '200';
+					$myresponse->message = '';
+				}
+			} catch (Exception $e) {
+				$myresponse->code = '401';
+				$myresponse->message = "Excepción capturada: ".$e->getMessage().".";
+			}
+		}
+		
+		return $myresponse;
+	}
 }
 
 ?>

@@ -163,3 +163,27 @@
 	  </div>
 	</div>
 	
+
+	<input class="modal-state" id="modal-send-to-sprint" type="checkbox" ref="modalCreateSprint">
+	<div class="modal">
+	  <label class="modal-bg" for="modal-send-to-sprint"></label>
+	  <div class="modal-body" style="max-width:700px;min-width:430px;">
+		<label class="btn-close" for="modal-send-to-sprint">X</label>
+		<h4 class="modal-title">Send to Sprint</h4>
+		<br/>
+		<div class="form-group">
+			<select class="inline" id="slSendToSprint" v-model="sendToSprintId">
+			  <option v-for="sprint in sprintsListJSON" v-bind:value="sprint.id">
+				{{ sprint.name }}
+			  </option>
+			</select>
+		</div>
+		<div class="row flex-center" v-if="sendToSprintId !== currentSprintId && sendToSprintId !== null">
+			<button class="btn-success-outline" v-on:click="SendToSprint()">Send</button>
+		</div>
+		<div style="height: 77px" v-else>
+		</div>
+
+	  </div>
+	</div>
+	
